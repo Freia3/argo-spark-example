@@ -10,7 +10,7 @@ Hello-world workflow logs get archived in the azure storage account but spark wo
 6. kubectl apply -f permissions-argo.yaml
 7. Create azure blob storage account. Update storage account name and container name in workflow-controller-configmap.yaml.
 8. kubectl create secret generic my-azure-storage-credentials \
-  --from-literal "account-access-key=$(az storage account keys list -n storageaccountname --query '[0].value' -otsv)" -n argo
+  --from-literal "account-access-key=$(az storage account keys list -n storageaccountname --query '[0].value' -otsv)" -n argo  
   Don't forget to update the storage account name here.
 9. kubectl apply -f workflow-controller-configmap.yaml
 10. kubectl apply -f spark-operator-kubernetes-dag.yaml
