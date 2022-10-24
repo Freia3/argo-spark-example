@@ -28,5 +28,5 @@ data:
 kubectl delete configmap/workflow-controller-configmap -n argo  
 kubectl apply -f workflow-controller-configmap.yaml  
 10. restart argo server and workflow-controller: kubectl delete pods -n argo --all  
-10. kubectl create -f spark-operator-kubernetes-dag.yaml -- does not archive logs in storage account  
-11. kubectl create -f hello-world.yaml -- does archive logs
+11. kubectl create -f spark-operator-kubernetes-dag.yaml -- does not archive logs in storage account  
+12. kubectl create -f hello-world.yaml -- does archive logs
