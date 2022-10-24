@@ -1,0 +1,46 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: spark-kubernetes-dag
+  namespace: freia
+spec:
+  entrypoint: sparkling-operator
+  serviceAccountName: argo-spark
+  templates:
+  - name: sparkpi
+    resource: 
+      action: create 
+      successCondition: status.applicationState.state in (COMPLETED)
+      failureCondition: 'status.applicationState.state in (FAILED, SUBMISSION_FAILED, UNKNOWN)'
+      manifest: | 
+        apiVersion: "sparkoperator.k8s.io/v1beta2"
+        kind: SparkApplication
+        metadata:
+          generateName: spark-pi
+          namespace: freia
+        spec:
+          type: Scala
+          mode: cluster
+          image: "gcr.io/spark-operator/spark:v3.0.0"
+          imagePullPolicy: Always
+          mainClass: org.apache.spark.examples.SparkPi
+          mainApplicationFile: "local:///opt/spark/examples/jars/spark-examples_2.12-3.0.0.jar"
+          sparkVersion: "3.0.0"
+          restartPolicy:
+            type: Never
+          driver:
+            memory: "512m"
+            labels:
+              version: 3.0.0
+            serviceAccount: my-release-spark
+          executor:
+            instances: 1
+            memory: "512m"
+            labels:
+              version: 3.0.0
+  - name: sparkling-operator
+    dag:
+      tasks:
+      - name: SparkPi1
+        template: sparkpi
+
