@@ -4,11 +4,11 @@ metadata:
   annotations:
     kubectl.kubernetes.io/last-applied-configuration: |
       {"apiVersion":"v1","kind":"ConfigMap","metadata":{"annotations":{},"name":"workflow-controller-configmap","namespace":"argo"}}
-  creationTimestamp: "2022-10-21T13:05:16Z"
+  creationTimestamp: "2022-10-24T13:13:29Z"
   name: workflow-controller-configmap
   namespace: argo
-  resourceVersion: "25602813"
-  uid: c8ec705e-0fc4-40c2-a0ad-57bce13585a6
+  resourceVersion: "27122120"
+  uid: f8d9edc2-cbaf-4df2-877e-961aa7841f93
 data:
   artifactRepository: |
     archiveLogs: true
